@@ -2,20 +2,13 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 3.27"
+      version = "~> 4.00"
     }
   }
-
-  required_version = ">= 0.14.9"
-}
-
-provider "aws" {
-  profile = "default"
-  region  = "us-east-1"
 }
 
 module "vpc" {
-  source = "terraform-aws-module/vpc/aws"
+  source = "terraform-aws-modules/vpc/aws"
 
   name = "terraform-vpc"
   cidr = "10.17.0.0/16"
@@ -28,16 +21,16 @@ module "vpc" {
   enable_vpn_gateway = true
 
   tags = {
-    Terraform = "true"
+    Terraform   = "true"
     Environment = "dev"
   }
-} 
+}
 
 resource "aws_instance" "app_server" {
   ami           = "ami-08d70e59c07c61a3a"
   instance_type = "t2.micro"
 
   tags = {
-    Name = "ExampleAppServerInstance"
+    Name = "terraform-instance-aws"
   }
 }
