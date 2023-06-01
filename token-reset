@@ -1,0 +1,2 @@
+oci iam region list --config-file /home/daslan/.oci/config --profile terraform-oci --auth security_token
+oci session refresh --profile

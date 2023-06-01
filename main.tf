@@ -26,6 +26,20 @@ module "vpc" {
   }
 }
 
+module "ssh_security_group" {
+  source  = "terraform-aws-modules/security-group/aws//modules/ssh"
+  version = "~> 4.0"
+
+  name = "ssh security group"
+  vpc_id = ""
+  create = true
+  description = " Allow someone to ssh in"
+
+  tags = {
+    Terraform = "true"}
+    Environment = "dev"
+}
+
 resource "aws_instance" "app_server" {
   ami           = "ami-08d70e59c07c61a3a"
   instance_type = "t2.micro"
